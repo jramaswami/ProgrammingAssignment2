@@ -23,13 +23,13 @@ makeCacheMatrix <- function(m = matrix()) {
         # to NULL when the value of the matrix
         # is changed
         set <- function(y) {
-                x <<- y
+                m <<- y
                 i <<- NULL
         }
         
         # function to get the current value of
         # the matrix
-        get <- function() x
+        get <- function() m
                 
         # function to set the cached value of
         # the inverse of the matrix
@@ -62,13 +62,14 @@ makeCacheMatrix <- function(m = matrix()) {
 cacheSolve <- function(x, ...) {
         # Get the current value of the inverse matrix
         # cached in the cache matrix object
-        i <- x$getinverse
+        i <- x$getinverse()
         
         # If the cached value of the inverse matrix
         # is not NULL then get the cached value
         # and return it
         if (!is.null(i)) {
                 message("Getting cached inverse matrix")
+                return(i)
         }
         
         # If the cached value wasn't NULL get the matrix ...
@@ -81,5 +82,3 @@ cacheSolve <- function(x, ...) {
         # Return a matrix that is the inverse of 'x'
         inv
 }
-
-# TODO: write unit tests
